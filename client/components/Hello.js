@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-Hello = (props, context) => {
+const Hello = (props, context) => {
   return (
   );
 }
