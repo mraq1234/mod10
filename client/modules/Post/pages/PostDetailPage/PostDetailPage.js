@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import styles from './PostDetailPage.css';
 
@@ -18,7 +18,7 @@ export class PostDetailPage extends Component {
     this.state = {
       name: this.props.post.name,
       title: this.props.post.title,
-      content: this.props.post.content
+      content: this.props.post.content,
     };
   }
 
@@ -27,9 +27,9 @@ export class PostDetailPage extends Component {
     this.props.editPostRequest(this.state);
   };
 
-  handleInputChange = ({target: {value, name}}) => {
+  handleInputChange = ({ target: { value, name } }) => {
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -37,28 +37,36 @@ export class PostDetailPage extends Component {
     return (
       <div className={styles['form-content']}>
         <h2 className={styles['form-title']}><FormattedMessage id="editPost" /></h2>
-        <input placeholder={this.props.intl.messages.authorName}
+        <input
+          placeholder={this.props.intl.messages.authorName}
           className={styles['form-field']}
           name="name" value={this.state.name}
-          onChange={this.handleInputChange}/>
-        <input placeholder={this.props.intl.messages.postTitle}
+          onChange={this.handleInputChange}
+        />
+        <input
+          placeholder={this.props.intl.messages.postTitle}
           className={styles['form-field']}
           name="title"
           value={this.state.title}
-          onChange={this.handleInputChange}/>
-        <textarea placeholder={this.props.intl.messages.postContent}
+          onChange={this.handleInputChange}
+        />
+        <textarea
+          placeholder={this.props.intl.messages.postContent}
           className={styles['form-field']}
           name="content"
           value={this.state.content}
-          onChange={this.handleInputChange}/>
-        <a className={styles['post-submit-button']}
+          onChange={this.handleInputChange}
+        />
+        <a
+          className={styles['post-submit-button']}
           href="#"
-          onClick={this.handleEditPost}>
+          onClick={this.handleEditPost}
+        >
           <FormattedMessage id="submit" />
         </a>
       </div>
     );
-};
+  };
 
   renderPost = () => {
     return (
@@ -74,16 +82,18 @@ export class PostDetailPage extends Component {
           {this.props.post.content}
         </p>
       </div>
-    )
+    );
   };
 
   render() {
     return (
       <div>
         <Helmet title={this.props.post.title} />
-        <a className={styles['edit-post-button']}
+        <a
+          className={styles['edit-post-button']}
           href="#"
-          onClick={this.props.toggleEditPost}>
+          onClick={this.props.toggleEditPost}
+        >
           <FormattedMessage id="editPost" />
         </a>
         {
@@ -105,15 +115,15 @@ PostDetailPage.need = [params => {
 function mapStateToProps(state, props) {
   return {
     post: getPost(state, props.params.cuid),
-    showEditPost: getShowEditPost(state)
+    showEditPost: getShowEditPost(state),
   };
 }
 
 function mapDispatchToProps(dispatch, props) {
   return {
     toggleEditPost: () => dispatch(toggleEditPost()),
-    editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post))
-  }
+    editPostRequest: (post) => dispatch(editPostRequest(props.params.cuid, post)),
+  };
 }
 
 PostDetailPage.propTypes = {
@@ -124,6 +134,10 @@ PostDetailPage.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,
+  intl: intlShape.isRequired,
+  toggleEditPost: PropTypes.func.isRequired,
+  editPostRequest: PropTypes.func.isRequired,
+  showEditPost: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(PostDetailPage));

@@ -57,7 +57,7 @@ export function editPost(req, res) {
 }
 
 export function votePost(req, res) {
-  Post.update({ cuid: req.params.cuid }, {voteCount: req.params.voteCount}).exec((err, post) => {
+  Post.update({ cuid: req.params.cuid }, { voteCount: req.params.voteCount }).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }

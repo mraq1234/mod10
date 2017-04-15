@@ -45,8 +45,11 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    voteCount: PropTypes.number.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
+  onVotePlus: PropTypes.func.isRequired,
+  onVoteMinus: PropTypes.func.isRequired,
 };
 
 export default PostListItem;

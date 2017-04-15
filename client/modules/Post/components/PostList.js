@@ -4,24 +4,20 @@ import React, { PropTypes } from 'react';
 import PostListItem from './PostListItem/PostListItem';
 
 function PostList(props) {
-
   const handleOnVote = (e, cuid, voteCount, val) => {
     e.preventDefault();
-    props.handleVoteClick(cuid, voteCount, val)
-  }
-  debugger;
+    props.handleVoteClick(cuid, voteCount, val);
+  };
   return (
     <div className="listView">
-      {
-        
-        props.posts.map(post => (
-          <PostListItem
-            post={post}
-            key={post.cuid}
-            onDelete={() => props.handleDeletePost(post.cuid)}
-            onVotePlus={ e => handleOnVote(e, post.cuid, post.voteCount, 1) }
-            onVoteMinus={ e => handleOnVote(e, post.cuid, post.voteCount, -1) }
-          />
+      {props.posts.map(post => (
+        <PostListItem
+          post={post}
+          key={post.cuid}
+          onDelete={() => props.handleDeletePost(post.cuid)}
+          onVotePlus={e => handleOnVote(e, post.cuid, post.voteCount, 1)}
+          onVoteMinus={e => handleOnVote(e, post.cuid, post.voteCount, -1)}
+        />
         ))
       }
     </div>

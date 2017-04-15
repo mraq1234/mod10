@@ -11,25 +11,24 @@ export function changeVoteCount(cuid, voteCount) {
   return {
     type: VOTE_POST,
     cuid,
-    voteCount
+    voteCount,
   };
-};
+}
 
 export function changeVoteCountRequest(cuid, voteCount) {
-  console.log(voteCount);
   return (dispatch) => {
     return callApi(`posts/${cuid}/${voteCount}`, 'put')
-      .then(res => dispatch(changeVoteCount(cuid, voteCount)));
+      .then(() => dispatch(changeVoteCount(cuid, voteCount)));
   };
-};
+}
 
 export function editPost(cuid, post) {
   return {
     type: EDIT_POST,
     cuid,
-    post
+    post,
   };
-};
+}
 
 export function editPostRequest(cuid, post) {
   return (dispatch) => {
@@ -39,12 +38,11 @@ export function editPostRequest(cuid, post) {
         title: post.title,
         content: post.content,
       },
-    }).then(res => dispatch(editPost(cuid,post)));
+    }).then(() => dispatch(editPost(cuid, post)));
   };
-};
+}
 
 export function addPost(post) {
-  debugger;
   return {
     type: ADD_POST,
     post,
@@ -53,7 +51,6 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return (dispatch) => {
-    debugger;
     return callApi('posts', 'post', {
       post: {
         name: post.name,
@@ -61,8 +58,7 @@ export function addPostRequest(post) {
         content: post.content,
       },
     }).then(res => {
-      debugger;
-      dispatch(addPost(res.post))
+      dispatch(addPost(res.post));
     });
   };
 }

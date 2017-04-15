@@ -3,12 +3,12 @@ import {
   EDIT_POST,
   ADD_POSTS,
   DELETE_POST,
-  VOTE_POST
+  VOTE_POST,
 } from './PostActions';
 
 // Initial State
 const initialState = {
-  data: []
+  data: [],
 };
 
 const PostReducer = (state = initialState, action) => {
@@ -21,19 +21,21 @@ const PostReducer = (state = initialState, action) => {
     case EDIT_POST:
       return {
         data: state.data.map(
-          post => post.cuid === action.cuid 
-          ? Object.assign({}, post, action.post) 
-          : post),
+          post => {
+            return post.cuid === action.cuid
+            ? Object.assign({}, post, action.post)
+            : post;
+          }),
       };
-    
     case VOTE_POST:
       return {
         data: state.data.map(
-          post => post.cuid === action.cuid 
-          ? { ...post, voteCount: action.voteCount } 
-          : post),
+          post => {
+            return post.cuid === action.cuid
+            ? { ...post, voteCount: action.voteCount }
+            : post;
+          }),
       };
-
     case ADD_POSTS:
       return {
         data: action.posts,

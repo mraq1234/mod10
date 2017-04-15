@@ -30,17 +30,19 @@ class PostListPage extends Component {
   };
 
   handleVoteClick = (cuid, voteCount, value) => {
-    voteCount += value;
-    this.props.dispatch(changeVoteCountRequest(cuid, voteCount));
+    const votes = voteCount + value;
+    this.props.dispatch(changeVoteCountRequest(cuid, votes));
   };
 
   render() {
     return (
       <div>
         <PostCreateWidget addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
-        <PostList handleDeletePost={this.handleDeletePost}
+        <PostList
+          handleDeletePost={this.handleDeletePost}
           handleVoteClick={this.handleVoteClick}
-          posts={this.props.posts} />
+          posts={this.props.posts}
+        />
       </div>
     );
   }
