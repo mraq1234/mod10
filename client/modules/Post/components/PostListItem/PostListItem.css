@@ -27,15 +27,41 @@
   color: #888;
   margin-bottom: 8px;
 }
+.del-post-action { 
+  text-align: left;
+  display: inline-block;
+  width: 50%;
+}
+.vote-post-action {
+  text-align: right;
+  display: inline-block;
+  width: 50%;
+}
+.vote-post-action button{
+  cursor: pointer;
+  font-size: 14px;
+  width: 28px;
+}
 
-.post-action a{
+.vote-post-action button:hover{
+  cursor: pointer;
+  font-style: bold;
+}
+
+.del-post-action a{
   color: #555;
   text-decoration: none;
   font-size: 14px;
   font-style: italic;
 }
+.vote-count {
+  display: inline-block;
+  font-size: 12px;
+  width: 16%;
+  text-align: center;
+}
 
-.post-action a:hover{
+.del-post-action a:hover{
   color: #EF5350;
 }
 
