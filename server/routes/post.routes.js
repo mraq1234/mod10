@@ -13,7 +13,7 @@ router.route('/posts').post(PostController.addPost);
 
 router.route('/posts/:cuid').put(PostController.editPost);
 
-router.route('/posts/:cuid/:voteCount').put(PostController.votePost);
+router.route('/posts/:cuid/:voteVal').post(PostController.votePost);
 
 // Delete a post by cuid
 router.route('/posts/:cuid').delete(PostController.deletePost);

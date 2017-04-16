@@ -29,9 +29,8 @@ class PostListPage extends Component {
     this.props.dispatch(addPostRequest({ name, title, content }));
   };
 
-  handleVoteClick = (cuid, voteCount, value) => {
-    const votes = voteCount + value;
-    this.props.dispatch(changeVoteCountRequest(cuid, votes));
+  handleVoteClick = (cuid, value) => {
+    this.props.dispatch(changeVoteCountRequest(cuid, value));
   };
 
   render() {

@@ -7,7 +7,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const VOTE_POST = 'VOTE_POST';
 
-export function changeVoteCount(cuid, voteCount) {
+export function changeVoteCount({ cuid, voteCount }) {
   return {
     type: VOTE_POST,
     cuid,
@@ -15,10 +15,10 @@ export function changeVoteCount(cuid, voteCount) {
   };
 }
 
-export function changeVoteCountRequest(cuid, voteCount) {
+export function changeVoteCountRequest(cuid, voteVal) {
   return (dispatch) => {
-    return callApi(`posts/${cuid}/${voteCount}`, 'put')
-      .then(() => dispatch(changeVoteCount(cuid, voteCount)));
+    return callApi(`posts/${cuid}/${voteVal}`, 'post')
+      .then((res) => dispatch(changeVoteCount(res.post)));
   };
 }
 

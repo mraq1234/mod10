@@ -57,11 +57,20 @@ export function editPost(req, res) {
 }
 
 export function votePost(req, res) {
-  Post.update({ cuid: req.params.cuid }, { voteCount: req.params.voteCount }).exec((err, post) => {
-    if (err) {
-      res.status(500).send(err);
+  const postId = req.params.cuid;
+  const value = parseInt(req.params.voteVal, 10);
+  Post.findOne({ cuid: postId }).exec((findErr, foundPost) => {
+    if (findErr) {
+      res.status(500).send(findErr);
     }
-    res.json({ post });
+    const post = foundPost;
+    post.voteCount += value;
+    Post.update({ cuid: postId }, { voteCount: post.voteCount }).exec((updateErr) => {
+      if (updateErr) {
+        res.status(500).send(updateErr);
+      }
+      return res.json({ post });
+    });
   });
 }
 
